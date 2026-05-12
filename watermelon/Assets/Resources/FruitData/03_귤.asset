@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: "03_\uADE4"
   m_EditorClassIdentifier: Assembly-CSharp::FruitData
   fruitName: "\uADE4"
-  radius: 0.7
+  sprite: {fileID: 21300000, guid: 954da8ee52dbe554d80b171873d738ff, type: 3}
+  radius: 1.43
   color: {r: 1, g: 0.6, b: 0.1, a: 1}
   score: 10
