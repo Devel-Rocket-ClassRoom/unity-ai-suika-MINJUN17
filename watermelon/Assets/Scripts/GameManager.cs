@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Container")]
-    public float minX = -3.8f;
-    public float maxX =  3.8f;
+    public float wallL = -4.0f;
+    public float wallR =  4.0f;
     public float dropY = 4.5f;
 
     [Header("UI")]
@@ -39,9 +39,10 @@ public class GameManager : MonoBehaviour
         if (mouse == null) return;
 
         Vector2 mpos = mouse.position.ReadValue();
+        float radius = FruitSpawner.Instance.fruitDataList[nextLevel].radius;
         float x = Mathf.Clamp(
             Camera.main.ScreenToWorldPoint(new Vector3(mpos.x, mpos.y, 0)).x,
-            minX, maxX);
+            wallL + radius, wallR - radius);
 
         if (previewObj != null)
             previewObj.transform.position = new Vector3(x, dropY, 0);
@@ -64,7 +65,9 @@ public class GameManager : MonoBehaviour
     void RefreshPreview()
     {
         if (previewObj != null) Destroy(previewObj);
-        previewObj = FruitSpawner.Instance.Spawn(nextLevel, new Vector2(0, dropY), isPreview: true);
+        float r = FruitSpawner.Instance.fruitDataList[nextLevel].radius;
+        float safeX = Mathf.Clamp(0f, wallL + r, wallR - r);
+        previewObj = FruitSpawner.Instance.Spawn(nextLevel, new Vector2(safeX, dropY), isPreview: true);
     }
 
     public void SpawnMerged(int level, Vector2 pos)
