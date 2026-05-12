@@ -24,9 +24,19 @@ public class FruitSpawner : MonoBehaviour
 
         var sr = go.GetComponent<SpriteRenderer>();
         if (sr != null)
-            sr.color = isPreview
-                ? new Color(data.color.r, data.color.g, data.color.b, 0.45f)
-                : data.color;
+        {
+            if (data.sprite != null)
+            {
+                sr.sprite = data.sprite;
+                sr.color = isPreview ? new Color(1, 1, 1, 0.45f) : Color.white;
+            }
+            else
+            {
+                sr.color = isPreview
+                    ? new Color(data.color.r, data.color.g, data.color.b, 0.45f)
+                    : data.color;
+            }
+        }
 
         var col = go.GetComponent<CircleCollider2D>();
         if (col != null) col.enabled = !isPreview;
