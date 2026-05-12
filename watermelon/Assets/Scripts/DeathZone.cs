@@ -23,12 +23,11 @@ public class DeathZone : MonoBehaviour
 
     void Update()
     {
-        var toRemove = new List<Fruit>();
+        var keys = new List<Fruit>(timers.Keys);
 
-        foreach (var kv in timers)
+        foreach (var f in keys)
         {
-            Fruit f = kv.Key;
-            if (f == null) { toRemove.Add(f); continue; }
+            if (f == null) { timers.Remove(f); continue; }
             if (Time.time - f.spawnTime < gracePeriod) continue;
 
             timers[f] += Time.deltaTime;
@@ -38,7 +37,5 @@ public class DeathZone : MonoBehaviour
                 return;
             }
         }
-
-        foreach (var f in toRemove) timers.Remove(f);
     }
 }
