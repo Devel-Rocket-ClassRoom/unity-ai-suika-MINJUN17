@@ -74,6 +74,12 @@ public class GameManager : MonoBehaviour
         FruitSpawner.Instance.Spawn(level, pos);
     }
 
+    public void AddScore(int amount)
+    {
+        score += amount;
+        if (scoreText != null) scoreText.text = "Score: " + score;
+    }
+
     public void TriggerGameOver()
     {
         if (isGameOver) return;
