@@ -1,0 +1,40 @@
+# Claude
+.claude/
+
+# Unity generated
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Bb]uild/
+[Bb]uilds/
+[Uu]ser[Ss]ettings/
+
+# Unity auto-generated solution/project files
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Mobile
+watermelon/Assets/MobileDependencyResolver/
+watermelon/Assets/MobileDependencyResolver.meta
+watermelon/Assets/Resources/BillingMode.json
+watermelon/Assets/Resources/BillingMode.json.meta
