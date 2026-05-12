@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public Text gameOverScoreText;
 
+    [Header("Next Fruit UI")]
+    public UnityEngine.UI.Image nextFruitImage;
+
     int score;
     int nextLevel;
     bool canDrop = true;
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         nextLevel = Random.Range(0, FruitSpawner.Instance.MaxDropLevel + 1);
+        UpdateNextFruitUI();
         RefreshPreview();
     }
 
@@ -56,6 +60,7 @@ public class GameManager : MonoBehaviour
 
             FruitSpawner.Instance.Spawn(nextLevel, new Vector2(x, dropY));
             nextLevel = Random.Range(0, FruitSpawner.Instance.MaxDropLevel + 1);
+            UpdateNextFruitUI();
 
             Invoke(nameof(RefreshPreview), 0.5f);
             Invoke(nameof(EnableDrop),    0.5f);
@@ -63,6 +68,22 @@ public class GameManager : MonoBehaviour
     }
 
     void EnableDrop() => canDrop = true;
+
+    void UpdateNextFruitUI()
+    {
+        if (nextFruitImage == null) return;
+        var data = FruitSpawner.Instance.fruitDataList[nextLevel];
+        if (data.sprite != null)
+        {
+            nextFruitImage.sprite = data.sprite;
+            nextFruitImage.color  = Color.white;
+        }
+        else
+        {
+            nextFruitImage.sprite = null;
+            nextFruitImage.color  = data.color;
+        }
+    }
 
     void RefreshPreview()
     {
