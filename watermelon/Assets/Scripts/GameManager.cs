@@ -40,9 +40,11 @@ public class GameManager : MonoBehaviour
 
         Vector2 mpos = mouse.position.ReadValue();
         float radius = FruitSpawner.Instance.fruitDataList[nextLevel].radius;
+        var col = FruitSpawner.Instance.fruitPrefab.GetComponent<CircleCollider2D>();
+        float colR = col != null ? col.radius * radius * 2f : radius;
         float x = Mathf.Clamp(
             Camera.main.ScreenToWorldPoint(new Vector3(mpos.x, mpos.y, 0)).x,
-            wallL + radius, wallR - radius);
+            wallL + colR, wallR - colR);
 
         if (previewObj != null)
             previewObj.transform.position = new Vector3(x, dropY, 0);
@@ -66,7 +68,9 @@ public class GameManager : MonoBehaviour
     {
         if (previewObj != null) Destroy(previewObj);
         float r = FruitSpawner.Instance.fruitDataList[nextLevel].radius;
-        float safeX = Mathf.Clamp(0f, wallL + r, wallR - r);
+        var col = FruitSpawner.Instance.fruitPrefab.GetComponent<CircleCollider2D>();
+        float colR = col != null ? col.radius * r * 2f : r;
+        float safeX = Mathf.Clamp(0f, wallL + colR, wallR - colR);
         previewObj = FruitSpawner.Instance.Spawn(nextLevel, new Vector2(safeX, dropY), isPreview: true);
     }
 
